@@ -1,0 +1,520 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  VENDOR
+  OEM
+  CONSULTANT
+  ADMIN
+}
+
+enum KYCStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_MORE_INFO
+}
+
+enum AuthStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  MORE_INFO_NEEDED
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  mobile          String?   @unique
+  passwordHash    String
+  role            Role?
+  isVerified      Boolean   @default(false)
+  
+  // OTP Fields
+  mobileOtp       String?
+  emailOtp        String?
+  otpExpiry       DateTime?
+
+  // Reset Password Fields
+  resetToken       String?   @unique
+  resetTokenExpiry DateTime?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  vendorProfile   VendorProfile?
+  oemProfile      OEMProfile?
+  consultantProfile ConsultantProfile?
+
+  sentMessages    Message[] @relation("SentMessages")
+  conversations   Conversation[] @relation("UserConversations") 
+  
+  auditLogs       AuditLog[]
+  notifications   Notification[]
+  payments        Payment[]
+  memberships     Membership[]
+  
+  posts           BlogPost[]
+  resources       Resource[] @relation("ResourceAuthor")
+}
+
+model VendorProfile {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id])
+  
+  companyName       String
+  slug              String?   @unique 
+  pan               String?
+  gst               String?   @unique
+  registeredAddress String?
+  contactPerson     String?
+  contactEmail      String?
+  contactPhone      String?
+
+  onboardingStep    Int       @default(1)
+  kycStatus         KYCStatus @default(PENDING)
+
+  kycDocuments      KYCDocument[]
+  products          Product[] 
+  authRequests      AuthorizationRequest[]
+  
+  categories        Category[]
+  subCategories     SubCategory[]
+
+  @@index([companyName])
+  @@index([kycStatus])
+}
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  slug          String        @unique
+  subCategories SubCategory[]
+  
+  vendorProfiles VendorProfile[]
+  products       Product[]
+  
+  @@index([name])
+}
+
+model SubCategory {
+  id            String        @id @default(cuid())
+  name          String
+  slug          String        @unique
+  categoryId    String
+  category      Category      @relation(fields: [categoryId], references: [id])
+
+  vendorProfiles VendorProfile[]
+  products       Product[]
+  
+  @@index([name])
+  @@index([categoryId])
+}
+
+model OEMProfile {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  
+  companyName     String
+  slug            String?   @unique
+  oemType         String?   // Manufacturer, Assembler, etc.
+  registrationNumber String?
+  registeredAddress String?
+  
+  contactPerson     String?
+  contactEmail      String?
+  contactPhone      String?
+  
+  kycStatus       KYCStatus @default(PENDING)
+  
+  catalog         Product[] 
+  receivedRequests AuthorizationRequest[]
+  
+  kycDocuments    KYCDocument[]
+
+  @@index([companyName])
+  @@index([kycStatus])
+}
+
+model ConsultantProfile {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  
+  name            String
+  firmName        String?
+  slug            String?   @unique
+  
+  bio             String?   @db.Text
+  experience      Int?      // Years
+  keyServices     String?   @db.Text
+  
+  contactEmail    String?
+  contactPhone    String?
+  officeAddress   String?   @db.Text
+
+  kycStatus       KYCStatus @default(PENDING)
+  
+  kycDocuments    KYCDocument[]
+  categories      ConsultingCategory[]
+  services        ConsultantService[]
+
+  @@index([name])
+  @@index([firmName])
+  @@index([kycStatus])
+}
+
+model ConsultantService {
+  id              String             @id @default(cuid())
+  consultantId    String
+  consultant      ConsultantProfile  @relation(fields: [consultantId], references: [id], onDelete: Cascade)
+  
+  title           String
+  description     String             @db.Text
+  pricingModel    String?            // Optional pricing model/fee structure
+  
+  isActive        Boolean            @default(true)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([consultantId])
+}
+
+model ConsultingCategory {
+  id            String             @id @default(cuid())
+  name          String             @unique
+  slug          String             @unique
+  description   String?            @db.Text
+  
+  consultants   ConsultantProfile[]
+  
+  @@index([name])
+}
+
+
+
+enum KYCDocStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  NEEDS_MORE_INFO
+}
+
+model KYCDocument {
+  id              String    @id @default(cuid())
+  fileUrl         String
+  fileType        String
+  documentType    String    // PAN, GST, CHEQUE, AUTH_LETTER, etc.
+  status          KYCDocStatus @default(PENDING)
+  notes           String?   // Reason for rejection
+  uploadedAt      DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  vendorId        String?
+  vendor          VendorProfile? @relation(fields: [vendorId], references: [id])
+  
+  oemId           String?
+  oem             OEMProfile? @relation(fields: [oemId], references: [id])
+  
+  consultantId    String?
+  consultant      ConsultantProfile? @relation(fields: [consultantId], references: [id])
+
+  @@index([vendorId])
+  @@index([oemId])
+  @@index([consultantId])
+  @@index([status])
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  name            String
+  description     String?
+  sku             String?
+  
+  specifications  String?   // Stored as text/markdown or JSON
+  features        String?
+  certifications  String?
+  warrantyInfo    String?
+  priceRange      String?
+  
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  
+  subCategoryId   String?
+  subCategory     SubCategory? @relation(fields: [subCategoryId], references: [id])
+
+  // If OEM owns the product catalog
+  oemId           String?
+  oem             OEMProfile? @relation(fields: [oemId], references: [id])
+  
+  // If Vendor lists a service/product
+  vendorId        String?
+  vendor          VendorProfile? @relation(fields: [vendorId], references: [id])
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  isArchived      Boolean   @default(false)
+  
+  authorizationRequests AuthorizationRequest[]
+  media                 ProductMedia[]
+
+  @@index([name])
+  @@index([categoryId])
+  @@index([subCategoryId])
+  @@index([oemId])
+  @@index([vendorId])
+  @@index([isArchived])
+  @@index([createdAt])
+}
+
+model ProductMedia {
+  id        String   @id @default(cuid())
+  url       String
+  type      String   // IMAGE, DOCUMENT
+  fileName  String
+  
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+}
+
+model AuthorizationRequest {
+  id              String    @id @default(cuid())
+  
+  vendorId        String
+  vendor          VendorProfile @relation(fields: [vendorId], references: [id])
+  
+  oemId           String
+  oem             OEMProfile    @relation(fields: [oemId], references: [id])
+  
+  productId       String
+  product         Product       @relation(fields: [productId], references: [id])
+  
+  status          AuthStatus    @default(PENDING)
+  notes           String?
+  oemComment      String?
+  adminComment    String?
+  isLocked        Boolean       @default(false)
+  
+  documents       AuthRequestDocument[]
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model AuthRequestDocument {
+  id              String               @id @default(cuid())
+  fileUrl         String
+  fileName        String
+  fileType        String               // IMAGE, PDF, etc.
+  
+  requestId       String
+  request         AuthorizationRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  
+  createdAt       DateTime             @default(now())
+}
+
+model MembershipPlan {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  price           Float
+  durationDays    Int
+  features        String[]
+  type            String    // Free, Premium, etc.
+  isRecommended   Boolean   @default(false)
+  tag             String?   // "Most Popular", etc.
+  
+  memberships     Membership[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Membership {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  
+  planId          String?
+  plan            MembershipPlan? @relation(fields: [planId], references: [id])
+  
+  planName        String
+  validFrom       DateTime
+  validUntil      DateTime
+  isActive        Boolean   @default(true)
+  
+  paymentId       String?   @unique
+  payment         Payment?  @relation(fields: [paymentId], references: [id])
+  
+  createdAt       DateTime  @default(now())
+}
+
+model Payment {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  
+  amount          Float
+  currency        String    @default("INR")
+  status          String    // PENDING, COMPLETED, FAILED
+  cashfreeOrderId   String?
+  cashfreePaymentId String?
+  
+  couponId        String?
+  coupon          Coupon?   @relation(fields: [couponId], references: [id])
+  discountAmount  Float?    @default(0)
+  
+  membership      Membership?
+  
+  createdAt       DateTime  @default(now())
+}
+
+model Coupon {
+  id              String    @id @default(cuid())
+  code            String    @unique
+  discountType    String    // PERCENTAGE, FIXED
+  discountValue   Float
+  minAmount       Float?    // Minimum subtotal required
+  maxDiscount     Float?    // Maximum discount amount (for percentage)
+  validFrom       DateTime
+  validUntil      DateTime
+  usageLimit      Int?      // Total uses allowed
+  usedCount       Int       @default(0)
+  isActive        Boolean   @default(true)
+  
+  applicablePlans String[]  // Array of MembershipPlan IDs or slugs
+  
+  payments        Payment[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Conversation {
+  id              String    @id @default(cuid())
+  participants    User[]    @relation("UserConversations")
+  messages        Message[]
+  
+  lastMessageAt   DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+}
+
+model Message {
+  id              String    @id @default(cuid())
+  conversationId  String
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+  
+  senderId        String
+  sender          User      @relation("SentMessages", fields: [senderId], references: [id])
+  
+  content         String
+  isRead          Boolean   @default(false)
+  
+  createdAt       DateTime  @default(now())
+}
+
+model Notification {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  
+  title           String
+  message         String
+  link            String?
+  isRead          Boolean   @default(false)
+  
+  createdAt       DateTime  @default(now())
+}
+
+model AuditLog {
+  id              String    @id @default(cuid())
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+  
+  action          String
+  details         String?
+  ipAddress       String?
+  
+  createdAt       DateTime  @default(now())
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  coverImage  String?
+  
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id])
+  
+  categories  BlogCategory[]
+  tags        BlogTag[]
+  
+  views       Int      @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogCategory {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  posts       BlogPost[]
+}
+
+model BlogTag {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  posts       BlogPost[]
+}
+
+enum ResourceType {
+  GUIDE
+  CASE_STUDY
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?  @db.Text
+  type        ResourceType
+  fileUrl     String?
+  content     String?  @db.Text
+  
+  topic       String?
+  audience    String?  // e.g., "Vendors", "OEMs", "All"
+  
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  
+  views       Int      @default(0)
+  downloads   Int      @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  authorId    String?
+  author      User?    @relation("ResourceAuthor", fields: [authorId], references: [id])
+
+  @@index([type])
+  @@index([topic])
+}
