@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
 
 export function SiteFooter() {
     return (
@@ -9,9 +10,23 @@ export function SiteFooter() {
                         <Link href="/" className="flex items-center space-x-2 mb-4">
                             <span className="text-xl font-bold tracking-tight">GovProNet</span>
                         </Link>
-                        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+                        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
                             The premier B2B platform connecting Government bodies, OEMs, and Vendors for compliant, efficient procurement.
                         </p>
+                        <div className="flex space-x-4">
+                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#10b981] hover:text-white transition-all">
+                                <Facebook className="h-5 w-5" />
+                            </Link>
+                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#E4405F] hover:text-white transition-all">
+                                <Instagram className="h-5 w-5" />
+                            </Link>
+                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">
+                                <Linkedin className="h-5 w-5" />
+                            </Link>
+                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#25D366] hover:text-white transition-all">
+                                <MessageCircle className="h-5 w-5" />
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="space-y-4">

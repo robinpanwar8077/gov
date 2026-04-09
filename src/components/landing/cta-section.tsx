@@ -47,8 +47,12 @@ export function CtaSection() {
                         <span className="text-[#10b981]">GeM Procurement?</span>
                     </motion.h2>
                     
-                    <motion.p variants={itemVariants} className="mx-auto mt-6 sm:mt-8 max-w-xl text-lg sm:text-xl text-slate-400 leading-relaxed font-medium mb-10 sm:mb-12 px-4 sm:px-0">
+                    <motion.p variants={itemVariants} className="mx-auto mt-6 sm:mt-8 max-w-xl text-lg sm:text-xl text-slate-400 leading-relaxed font-medium mb-4 px-4 sm:px-0">
                         Join 1500+ verified GeM participants scaling their government business with trusted connections.
+                    </motion.p>
+
+                    <motion.p variants={itemVariants} className="mx-auto max-w-2xl text-xl sm:text-2xl font-bold text-[#10b981] leading-relaxed mb-10 sm:mb-12 px-4 sm:px-0 italic">
+                        "This is not just a platform — this is your GeM Business Growth Network."
                     </motion.p>
 
                     <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 px-6 sm:px-0">

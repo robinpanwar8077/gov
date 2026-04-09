@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteHeader } from "@/components/landing/site-header";
 import { TrustComplianceSection } from "@/components/landing/trust-section";
 import { ValuePropSection } from "@/components/landing/value-prop-section";
+import { TestimonialsSection } from "@/components/landing/testimonials-section";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <PainPointsSection />
         <ValuePropSection />
         <AudienceSection />
+        <TestimonialsSection />
         <TrustComplianceSection />
         <CtaSection />
       </main>

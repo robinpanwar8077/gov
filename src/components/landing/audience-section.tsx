@@ -17,7 +17,7 @@ export function AudienceSection() {
         {
             icon: Building2,
             title: "OEMs",
-            description: "Connect with serious, compliant GeM vendors across India.",
+            description: "OEMs Looking for Serious & Active GeM Vendors Across India",
             link: "/signup?role=oem",
             linkText: "Join as OEM",
             color: "#0047AB"

@@ -13,13 +13,13 @@ export function ValuePropSection() {
         },
         {
             icon: Handshake,
-            title: "Trusted Vendor–OEM Networking",
+            title: "Direct Vendor—OEM Connections for Real Business Growth",
             description: "Connect with verified vendors, OEMs & consultants in one secure ecosystem.",
             color: "#10b981"
         },
         {
             icon: Zap,
-            title: "Built for GeM & PSU Business",
+            title: "Built Specifically to Win GeM & Government Tenders",
             description: "Designed keeping GeM, PSU & government procurement realities in mind.",
             color: "#0047AB"
         }
