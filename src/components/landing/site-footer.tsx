@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 export function SiteFooter() {
     return (
@@ -7,17 +8,29 @@ export function SiteFooter() {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
                     <div className="col-span-2 lg:col-span-2 pr-8">
-                        <Link href="/" className="flex items-center space-x-2 mb-4">
-                            <span className="text-xl font-bold tracking-tight">GovProNet</span>
+                        <Link href="/" className="flex items-center gap-3 mb-6 group">
+                            <div className="relative h-12 w-12 transition-transform ">
+                                <Image
+                                    src="/logo2.jpeg"
+                                    alt="GovProNet Logo"
+                                    fill
+                                    className="object-contain"
+                                    style={{
+                                        filter: 'invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.1)',
+                                        mixBlendMode: 'screen'
+                                    }}
+                                />
+                            </div>
+                            <span className="text-xl font-bold tracking-tight text-white group-hover:text-[#10b981] transition-colors">GovProNet</span>
                         </Link>
                         <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
                             The premier B2B platform connecting Government bodies, OEMs, and Vendors for compliant, efficient procurement.
                         </p>
                         <div className="flex space-x-4">
-                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#10b981] hover:text-white transition-all">
+                            <Link href="https://www.facebook.com/profile.php?id=61587868521022" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#10b981] hover:text-white transition-all">
                                 <Facebook className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#E4405F] hover:text-white transition-all">
+                            <Link href="https://www.instagram.com/govpronet/" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#E4405F] hover:text-white transition-all">
                                 <Instagram className="h-5 w-5" />
                             </Link>
                             <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">

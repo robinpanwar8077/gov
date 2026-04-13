@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
@@ -61,10 +62,19 @@ export function SiteHeader() {
                 <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-10">
                     {/* Logo Section */}
                     <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
-                        <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-[#0047AB] flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg transition-transform group-hover:scale-110">
-                            G
+                        <div className="relative h-12 w-12 sm:h-16 sm:w-16 transition-all ">
+                            <Image
+                                src="/logo2.jpeg"
+                                alt="GovProNet Logo"
+                                fill
+                                className="object-contain"
+                                style={{
+                                    filter: 'invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.1)',
+                                    mixBlendMode: 'screen'
+                                }}
+                            />
                         </div>
-                        <span className="text-xl sm:text-2xl font-extrabold tracking-tighter text-white">GovProNet</span>
+                        <span className="text-xl sm:text-2xl font-extrabold tracking-tighter text-white transition-colors group-hover:text-[#10b981]">GovProNet</span>
                     </Link>
 
                     {/* Desktop Navigation */}

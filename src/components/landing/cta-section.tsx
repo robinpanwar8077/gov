@@ -62,7 +62,7 @@ export function CtaSection() {
                             asChild
                         >
                             <Link href="/signup">
-                                Start Now <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                Get Verified OEM Access <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </Link>
                         </Button>
 

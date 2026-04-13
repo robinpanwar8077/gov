@@ -53,7 +53,7 @@ export function ValuePropSection() {
                     className="mb-16 md:mb-20"
                 >
                     <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
-                        What GovProNet Does
+                        How GovProNet Helps You Win More Government Business
                     </motion.h2>
                     <motion.p variants={itemVariants} className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed px-4 sm:px-0">
                         Simplifying the complex world of Government Procurement.
