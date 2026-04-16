@@ -11,7 +11,7 @@ export function SiteFooter() {
                         <Link href="/" className="flex items-center gap-3 mb-6 group">
                             <div className="relative h-16 w-16 transition-transform ">
                                 <Image
-                                    src="/Logo.png"
+                                    src="/Lo.png"
                                     alt="GovProNet Logo"
                                     fill
                                     className="object-contain"

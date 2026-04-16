@@ -64,7 +64,7 @@ export function SiteHeader() {
                     <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
                         <div className="relative h-12 w-12 sm:h-16 sm:w-16 transition-all ">
                             <Image
-                                src="/Logo.png"
+                                src="/Lo.png"
                                 alt="GovProNet Logo"
                                 fill
                                 className="object-contain"
