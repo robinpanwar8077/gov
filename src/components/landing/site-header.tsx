@@ -64,14 +64,10 @@ export function SiteHeader() {
                     <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
                         <div className="relative h-12 w-12 sm:h-16 sm:w-16 transition-all ">
                             <Image
-                                src="/logo2.jpeg"
+                                src="/Logo.png"
                                 alt="GovProNet Logo"
                                 fill
                                 className="object-contain"
-                                style={{
-                                    filter: 'invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.1)',
-                                    mixBlendMode: 'screen'
-                                }}
                             />
                         </div>
                         <span className="text-xl sm:text-2xl font-extrabold tracking-tighter text-white transition-colors group-hover:text-[#10b981]">GovProNet</span>

@@ -9,16 +9,12 @@ export function SiteFooter() {
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
                     <div className="col-span-2 lg:col-span-2 pr-8">
                         <Link href="/" className="flex items-center gap-3 mb-6 group">
-                            <div className="relative h-12 w-12 transition-transform ">
+                            <div className="relative h-16 w-16 transition-transform ">
                                 <Image
-                                    src="/logo2.jpeg"
+                                    src="/Logo.png"
                                     alt="GovProNet Logo"
                                     fill
                                     className="object-contain"
-                                    style={{
-                                        filter: 'invert(1) hue-rotate(180deg) brightness(1.2) contrast(1.1)',
-                                        mixBlendMode: 'screen'
-                                    }}
                                 />
                             </div>
                             <span className="text-xl font-bold tracking-tight text-white group-hover:text-[#10b981] transition-colors">GovProNet</span>
