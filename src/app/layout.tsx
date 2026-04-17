@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GovProNet - India’s First Trusted Network for GeM Vendors & OEMs",
   description: "Helping GeM vendors get verified OEM authorization, trusted connections, and real government business opportunities.",
+  icons: {
+    icon: "/Lo.png",
+  },
 };
 
 import { AuthProvider } from "@/components/providers/auth-provider";

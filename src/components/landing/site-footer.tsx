@@ -29,7 +29,7 @@ export function SiteFooter() {
                             <Link href="https://www.instagram.com/govpronet/" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#E4405F] hover:text-white transition-all">
                                 <Instagram className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">
+                            <Link href="https://www.linkedin.com/company/111242333/admin/dashboard/" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">
                                 <Linkedin className="h-5 w-5" />
                             </Link>
                             <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#25D366] hover:text-white transition-all">
