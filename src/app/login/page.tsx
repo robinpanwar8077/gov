@@ -69,7 +69,7 @@ export default function LoginPage() {
 
                     <form 
                         onSubmit={(e) => handleSafeSubmit(e, formAction)}
-                        className="grid gap-5"
+                        className="grid gap-5 [&_input]:text-slate-900 [&_input]:bg-white [&_input:-webkit-autofill]:[-webkit-text-fill-color:#0f172a]"
                     >
                         <div className="grid gap-2">
                             <Label htmlFor="email" className="text-slate-700">Email Address</Label>

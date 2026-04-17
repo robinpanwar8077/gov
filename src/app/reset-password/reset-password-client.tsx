@@ -87,7 +87,7 @@ export default function ResetPasswordPage() {
                     </p>
                 </div>
 
-                <form action={formAction} className="grid gap-6">
+                <form action={formAction} className="grid gap-6 [&_input]:text-slate-900 [&_input]:bg-white [&_input:-webkit-autofill]:[-webkit-text-fill-color:#0f172a]">
                     <input type="hidden" name="token" value={token} />
 
                     <div className="grid gap-2">

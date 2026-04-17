@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
     // Define public paths that don't require authentication
-    const publicPaths = ['/', '/login', '/signup', '/signup/verify', '/verify', '/unauthorized', '/forgot-password', '/reset-password', '/blog', '/resources'];
+    const publicPaths = ['/', '/login', '/signup', '/signup/verify', '/verify', '/unauthorized', '/forgot-password', '/reset-password', '/blog', '/resources', '/about', '/careers', '/contact', '/privacy', '/terms', '/compliance'];
     const authPages = ['/login', '/signup', '/forgot-password', '/reset-password'];
 
     const session = request.cookies.get('session')?.value;

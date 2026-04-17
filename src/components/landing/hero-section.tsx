@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export function HeroSection() {
   const containerVariants: Variants = {
@@ -89,15 +90,34 @@ export function HeroSection() {
           variants={itemVariants}
           className="mt-12 sm:mt-14 flex flex-col sm:flex-row justify-center gap-4 sm:gap-5 w-full sm:w-auto px-6 sm:px-0"
         >
-          <Button
-            size="lg"
-            className="h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl bg-[#10b981] hover:bg-[#059669] text-white shadow-lg transition-all hover:scale-105 active:scale-95 group w-full sm:w-auto"
-            asChild
-          >
-            <Link href="/signup">
-              Get Verified OEM Access <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                className="h-14 sm:h-16 px-8 sm:px-10 text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl bg-[#10b981] hover:bg-[#059669] text-white shadow-lg transition-all hover:scale-105 active:scale-95 group w-full sm:w-auto"
+              >
+                Get Verified OEM Access <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-2xl p-0 overflow-hidden bg-white border-0 h-[650px] flex flex-col">
+              <DialogHeader className="p-4 pb-2 bg-slate-50 border-b flex-shrink-0">
+                <DialogTitle className="text-xl text-slate-900 border-none">Get Verified OEM Access</DialogTitle>
+                <DialogDescription className="sr-only">Fill out the form below.</DialogDescription>
+              </DialogHeader>
+              <div className="w-full flex-1 overflow-y-auto bg-slate-50 flex items-center justify-center p-2">
+                <iframe
+                    src="https://admin.myappz.ai/widget/form/69e21ff8b28a3"
+                    style={{ width: "100%", height: "600px", border: "none", borderRadius: "3px" }}
+                    id="inline-69e21ff8b28a3"
+                    data-form-name="Form For Website"
+                    data-layout-iframe-id="inline-69e21ff8b28a3"
+                    data-form-id="69e21ff8b28a3"
+                    data-height="600"
+                    title="Form For Website">
+                </iframe>
+              </div>
+            </DialogContent>
+          </Dialog>
           <Button
             size="lg"
             variant="outline"

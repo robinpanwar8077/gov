@@ -82,7 +82,7 @@ export default function SignUpClient() {
 
                 <form 
                     onSubmit={(e) => handleSafeSubmit(e, formAction)}
-                    className="grid gap-6"
+                    className="grid gap-6 [&_input]:text-slate-900 [&_input]:bg-white [&_input:-webkit-autofill]:[-webkit-text-fill-color:#0f172a]"
                 >
 
                     {/* 4. Role Selection Cards */}

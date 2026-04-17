@@ -77,7 +77,7 @@ export default function ForgotPasswordPage() {
                         <p className="mt-4 font-semibold text-green-900">Redirecting to login…</p>
                     </div>
                 ) : (
-                    <form action={formAction} className="grid gap-6" onSubmit={(e) => {
+                    <form action={formAction} className="grid gap-6 [&_input]:text-slate-900 [&_input]:bg-white [&_input:-webkit-autofill]:[-webkit-text-fill-color:#0f172a]" onSubmit={(e) => {
                         if (!navigator.onLine) {
                             e.preventDefault();
                             toast.error("No internet connection. Please check your connection and try again.");

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import { toast } from "sonner";
 
 /**
@@ -45,14 +45,22 @@ export function useGracefulForm(isDirty: boolean = false) {
         const toastId = toast.loading("Processing your request—please wait...");
         
         try {
-            // We use startTransition if we were using useActionState's action directly, 
-            // but formAction from useActionState is already transition-wrapped usually.
-            // Calling it directly works for the state update.
-            await action(formData);
+            startTransition(() => {
+                const res = action(formData);
+                if (res instanceof Promise) {
+                    res.catch(err => {
+                        console.error("Graceful Form Error Catch:", err);
+                        toast.error("Server or Network failure. We couldn't reach the server, but your entered data is still here.");
+                    }).finally(() => {
+                        toast.dismiss(toastId);
+                    });
+                } else {
+                    toast.dismiss(toastId);
+                }
+            });
         } catch (err) {
             console.error("Graceful Form Error Catch:", err);
             toast.error("Server or Network failure. We couldn't reach the server, but your entered data is still here.");
-        } finally {
             toast.dismiss(toastId);
         }
     };

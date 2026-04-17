@@ -19,9 +19,10 @@ export function SiteFooter() {
                             </div>
                             <span className="text-xl font-bold tracking-tight text-white group-hover:text-[#10b981] transition-colors">GovProNet</span>
                         </Link>
-                        <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
-                            The premier B2B platform connecting Government bodies, OEMs, and Vendors for compliant, efficient procurement.
-                        </p>
+                        <div className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6 space-y-2">
+                            <p className="font-medium text-foreground italic">"India’s Trusted GovB2B Network"</p>
+                            <p>Email: <a href="mailto:support@govpronet.com" className="hover:text-primary transition-colors">support@govpronet.com</a></p>
+                        </div>
                         <div className="flex space-x-4">
                             <Link href="https://www.facebook.com/profile.php?id=61587868521022" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#10b981] hover:text-white transition-all">
                                 <Facebook className="h-5 w-5" />
@@ -69,7 +70,7 @@ export function SiteFooter() {
                 </div>
 
                 <div className="mt-16 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-                    <p>&copy; {new Date().getFullYear()} GovProNet. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} GovProNet Pvt Ltd. All rights reserved.</p>
                     <p>Made for the Future of Governance.</p>
                 </div>
             </div>
