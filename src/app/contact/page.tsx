@@ -21,6 +21,11 @@ export default function ContactPage() {
                         <a href="tel:+918432518911" className="hover:text-primary transition-colors">+91 8432518911</a>
                     </p>
                     <p className="flex items-center gap-3">
+                        <span className="text-2xl">💬</span> 
+                        <span className="font-medium text-foreground">WhatsApp:</span> 
+                        <a href="https://wa.me/918432518911" target="_blank" className="hover:text-primary transition-colors">+91 8432518911</a>
+                    </p>
+                    <p className="flex items-center gap-3">
                         <span className="text-2xl">📧</span> 
                         <span className="font-medium text-foreground">Email:</span> 
                         <a href="mailto:info@govpronet.com" className="hover:text-primary transition-colors">info@govpronet.com</a>

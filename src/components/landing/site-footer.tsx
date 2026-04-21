@@ -22,6 +22,7 @@ export function SiteFooter() {
                         <div className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6 space-y-2">
                             <p className="font-medium text-foreground italic">"India’s Trusted GovB2B Network"</p>
                             <p>Email: <a href="mailto:support@govpronet.com" className="hover:text-primary transition-colors">support@govpronet.com</a></p>
+                            <p>WhatsApp: <a href="https://wa.me/918432518911" target="_blank" className="hover:text-primary transition-colors">+91 8432518911</a></p>
                         </div>
                         <div className="flex space-x-4">
                             <Link href="https://www.facebook.com/profile.php?id=61587868521022" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#10b981] hover:text-white transition-all">
@@ -36,7 +37,7 @@ export function SiteFooter() {
                             <Link href="https://www.youtube.com/@govpronet" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#FF0000] hover:text-white transition-all">
                                 <Youtube className="h-5 w-5" />
                             </Link>
-                            <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#25D366] hover:text-white transition-all">
+                            <Link href="https://wa.me/918432518911" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#25D366] hover:text-white transition-all">
                                 <MessageCircle className="h-5 w-5" />
                             </Link>
                         </div>
