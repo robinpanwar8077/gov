@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { OfflineBanner } from "@/components/offline-banner";
+import { ChatWidget } from "@/components/chat-widget";
 
 export default function RootLayout({
   children,
@@ -37,7 +38,9 @@ export default function RootLayout({
         <AuthProvider>
           <OfflineBanner />
           {children}
+          <ChatWidget />
         </AuthProvider>
+
         <Toaster richColors position="top-right" />
       </body>
     </html>

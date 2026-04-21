@@ -48,6 +48,57 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+
+/* 
+ * INDUSTRIAL RESET & PROTECTION LAYER 
+ * -----------------------------------
+ * This section protects the main UI from third-party scripts (like chatbots) 
+ * that inject global style overrides. Using !important on root elements 
+ * ensures that Tailwind's foundations remain stable.
+ */
+html,
+:root {
+  font-size: 16px !important;
+  scroll-behavior: smooth !important;
+  background-color: #050b1a !important; /* Force background to prevent white-outs */
+}
+
+body {
+  font-family: var(--font-geist-sans), sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  overflow-x: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* Global reset for box-sizing to prevent layout breakage from scripts using 'content-box' */
+*, ::before, ::after {
+  box-sizing: border-box !important;
+}
+
+/* Maintain container and heading integrity */
+.container {
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-geist-sans), sans-serif !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Ensure the chat widget itself remains visible over the reset */
+.myappz-widget-root,
+#myappz-chat-script,
+[class*="myappz"] {
+  z-index: 99999 !important;
+  /* Allow the widget to define its own typography internal to its root */
+}
+
 :root {
   --radius: 0.75rem;
   --background: #050b1a;

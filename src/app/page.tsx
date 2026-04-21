@@ -18,10 +18,13 @@ export default function Home() {
         <ValuePropSection />
         <AudienceSection />
         <TestimonialsSection />
+
         <TrustComplianceSection />
         <CtaSection />
+
       </main>
       <SiteFooter />
     </div>
+
   );
 }
