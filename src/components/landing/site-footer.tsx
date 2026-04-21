@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, MessageCircle } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MessageCircle, Youtube } from "lucide-react";
 import Image from "next/image";
 
 export function SiteFooter() {
@@ -30,8 +30,11 @@ export function SiteFooter() {
                             <Link href="https://www.instagram.com/govpronet/" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#E4405F] hover:text-white transition-all">
                                 <Instagram className="h-5 w-5" />
                             </Link>
-                            <Link href="https://www.linkedin.com/company/111242333/admin/dashboard/" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">
+                            <Link href="https://www.linkedin.com/company/111242333/admin/dashboard/" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#0A66C2] hover:text-white transition-all">
                                 <Linkedin className="h-5 w-5" />
+                            </Link>
+                            <Link href="https://www.youtube.com/@govpronet" target="_blank" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#FF0000] hover:text-white transition-all">
+                                <Youtube className="h-5 w-5" />
                             </Link>
                             <Link href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/50 text-muted-foreground hover:bg-[#25D366] hover:text-white transition-all">
                                 <MessageCircle className="h-5 w-5" />
